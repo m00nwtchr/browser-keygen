@@ -7,7 +7,7 @@ function ab2str(buf) {
 function toPem(exported, type) {
 	const exportedAsString = ab2str(exported);
 	const exportedAsBase64 = window.btoa(exportedAsString);
-	const pemExported = `-----BEGIN ${type} KEY-----\n${exportedAsBase64}\n-----END PRIVATE KEY-----`;
+	const pemExported = `-----BEGIN ${type} KEY-----\n${exportedAsBase64}\n-----END ${type} KEY-----`;
 
 	return pemExported;
 }
