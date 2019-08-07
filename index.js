@@ -4,10 +4,10 @@ function ab2str(buf) {
 	return String.fromCharCode.apply(null, new Uint8Array(buf));
 }
 
-function toPem(exported) {
+function toPem(exported, type) {
 	const exportedAsString = ab2str(exported);
 	const exportedAsBase64 = window.btoa(exportedAsString);
-	const pemExported = `-----BEGIN PRIVATE KEY-----\n${exportedAsBase64}\n-----END PRIVATE KEY-----`;
+	const pemExported = `-----BEGIN ${type} KEY-----\n${exportedAsBase64}\n-----END PRIVATE KEY-----`;
 
 	return pemExported;
 }
@@ -64,17 +64,21 @@ if (typeof crypto.generateKeyPairSync === 'function') {
 				),
 				window.crypto.subtle.exportKey(
 					options.privateKeyEncoding.type,
-					key.privateKey
+					keyPair.privateKey
 				)
 			]).then((keyPair) => {
 				if (options.publicKeyEncoding.format === "pem") {
-					keyPair[0] = toPem(keyPair[0])
+					keyPair[0] = toPem(keyPair[0], "PUBLIC")
 				}
 				if (options.privateKeyEncoding.format === "pem") {
-					keyPair[1] = toPem(keyPair[1])
+					keyPair[1] = toPem(keyPair[1], "PRIVATE")
 				}
 				return keyPair;
-			}).then(callback);
+			}).then((keyPair) => {
+				callback(null, keyPair[0], keyPair[1]);
+			}).catch((err) => {
+				callback(err, null);
+			});
 		});
 	}
 }
