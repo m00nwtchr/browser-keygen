@@ -1,0 +1,19 @@
+{
+  "name": "browser-keygen",
+  "version": "1.0.1",
+  "description": "A browser version of crypto.generateKeyPair using the WebCryptoAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukas2005/browser-keygen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lukas2005/browser-keygen/issues"
+  },
+  "homepage": "https://github.com/lukas2005/browser-keygen",
+  "author": "lukas2005",
+  "license": "MIT"
+}
