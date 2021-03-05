@@ -1,0 +1,1 @@
+export function generateKeyPair(type: string, options: { modulusLength: number, namedCurve?: string, publicKeyEncoding: { format: string, type: string }, privateKeyEncoding: { format: string, type: string }}, cb: (error: string, pubKey: string, privKey: string) => void): void;
